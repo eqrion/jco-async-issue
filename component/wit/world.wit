@@ -1,0 +1,6 @@
+package example:repro;
+
+world repro {
+    import tick: func();
+    export run: func(n: u32);
+}

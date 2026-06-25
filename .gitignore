@@ -1,0 +1,4 @@
+node_modules/
+component/target/
+generated/
+*.heapsnapshot

@@ -1,0 +1,17 @@
+{
+  "name": "jco-async-issue",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "cd component && cargo build --target wasm32-wasip2 --release",
+    "transpile": "npx jco transpile component/target/wasm32-wasip2/release/jco_async_issue.wasm -o generated --name component --instantiation async && node patch.mjs",
+    "repro": "node --expose-gc repro.mjs",
+    "repro:fixed": "node patch.mjs --fix && node --expose-gc repro.mjs",
+    "all": "npm run build && npm run transpile && npm run repro"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.24.3",
+    "@bytecodealliance/preview2-shim": "^0.19.0"
+  }
+}

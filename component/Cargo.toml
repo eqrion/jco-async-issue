@@ -1,0 +1,11 @@
+[package]
+name = "jco-async-issue"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wit-bindgen = { version = "0.58.0", default-features = false, features = ["macros"] }

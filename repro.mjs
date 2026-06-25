@@ -46,8 +46,12 @@ console.log(`heap before ${CALLS} import calls: ${before}MB`);
 
 component.run(CALLS);
 
-globalThis.gc?.();
+// Drain the microtask queue first (all queueMicrotask callbacks from
+// _lowerImportBackwardsCompat fire before the setTimeout callback).
 await new Promise(r => setTimeout(r, 50));
+// Now GC: with the bug, AsyncSubtask objects are still rooted in
+// cstate.handles and cannot be collected. With the fix, they're gone.
+globalThis.gc?.();
 
 const after = heapMB();
 writeHeapSnapshot("./snapshot-after.heapsnapshot");
